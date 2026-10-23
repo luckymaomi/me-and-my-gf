@@ -4,7 +4,7 @@
 
 | Skill | 文件 |
 | --- | --- |
-| 旅行偏好 | `core/luxing-pianhao.md` |
+| 旅行计划制定 | `core/luxing-jihua.md` |
 | 旅行记录 | `core/luxing-jilu.md` |
 | 我会做的 | `core/huizuofan.md` |
 | 每天吃的 | `core/meitian-chi.md` |
