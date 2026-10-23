@@ -1,6 +1,6 @@
 ---
 name: 补剂食用
-description: lifein21：补剂实际食用节奏与记录。
+description: me-and-my-gf：补剂实际食用节奏与记录。
 ---
 
 # 补剂食用

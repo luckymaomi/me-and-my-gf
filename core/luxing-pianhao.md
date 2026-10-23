@@ -1,6 +1,6 @@
 ---
 name: 旅行偏好
-description: lifein21：旅行偏好与和 Agent 做计划时的默认口径（必需品 + 衣食住行）。
+description: me-and-my-gf：旅行偏好与和 Agent 做计划时的默认口径（必需品 + 衣食住行）。
 ---
 
 # 旅行偏好

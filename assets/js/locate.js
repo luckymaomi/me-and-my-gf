@@ -202,7 +202,7 @@
       sync();
       if (map) setTimeout(function () { map.invalidateSize(); }, 50);
     });
-    window.addEventListener("lifein21:themechange", sync);
+    window.addEventListener("me-and-my-gf:themechange", sync);
   }
 
   initMap();

@@ -1,6 +1,6 @@
 ---
 name: 每天吃的
-description: lifein21：每日饮食流水。
+description: me-and-my-gf：每日饮食流水。
 ---
 
 # 每天吃的

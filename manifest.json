@@ -1,7 +1,7 @@
 {
-  "name": "lifein21",
-  "packPrefix": "lifein21",
-  "remoteSkillBase": "https://raw.githubusercontent.com/luckymaomi/lifein21/master/",
+  "name": "me-and-my-gf",
+  "packPrefix": "me-and-my-gf",
+  "remoteSkillBase": "https://raw.githubusercontent.com/luckymaomi/me-and-my-gf/master/",
   "files": [
     {
       "id": "AGENTS",

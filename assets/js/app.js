@@ -89,7 +89,7 @@ function remoteSkillUrl(file) {
 function agentFetchSinglePrompt(file) {
   const url = remoteSkillUrl(file);
   const title = file.title || file.id || "Skill";
-  return `请阅读 ${url}（lifein21：${title}），然后启动本 Skill。`;
+  return `请阅读 ${url}（me-and-my-gf：${title}），然后启动本 Skill。`;
 }
 
 /**
@@ -144,8 +144,8 @@ function closeMobileMenu() {
 }
 
 function syncThemeButtons() {
-  if (!window.Lifein21Theme) return;
-  const isDark = window.Lifein21Theme.getTheme() === "dark";
+  if (!window.ThemeController) return;
+  const isDark = window.ThemeController.getTheme() === "dark";
   const label = isDark ? "切换到白天模式" : "切换到暗夜模式";
   document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
     button.setAttribute("aria-label", label);
@@ -224,7 +224,7 @@ function openLocate() {
   const version = ++renderVersion;
   activeId = LOCATE_ID;
   activeMarkdown = "";
-  document.title = "定位 - lifein21";
+  document.title = "定位 - me-and-my-gf";
   markActive(LOCATE_ID);
 
   const wrap = document.createElement("div");
@@ -364,7 +364,7 @@ async function openFile(id, searchValue = els.search.value) {
 
   const version = ++renderVersion;
   activeId = id;
-  document.title = `${file.title} - lifein21`;
+  document.title = `${file.title} - me-and-my-gf`;
   markActive(id);
   els.content.classList.remove("content-is-embed");
   els.content.textContent = "加载中";
@@ -463,7 +463,7 @@ async function packDownload() {
 
   try {
     const stamp = new Date().toISOString().slice(0, 10);
-    const brand = manifest.name || "lifein21";
+    const brand = manifest.name || "me-and-my-gf";
     const parts = [
       `# ${brand}合集`,
       "",
@@ -478,7 +478,7 @@ async function packDownload() {
       parts.push(`===== ${title}（${file.path}） =====`, "", body, "", "");
     }
 
-    const filename = `${manifest.packPrefix || "lifein21"}-合集-${stamp}.md`;
+    const filename = `${manifest.packPrefix || "me-and-my-gf"}-合集-${stamp}.md`;
     triggerDownload(filename, `${parts.join("\n").replace(/\s+$/, "")}\n`);
   } catch (err) {
     console.error(err);
@@ -494,7 +494,7 @@ async function boot() {
     const res = await fetch(MANIFEST_URL);
     if (!res.ok) throw new Error(`清单加载失败：${res.status}`);
     manifest = await res.json();
-    els.brand.textContent = manifest.name || "lifein21";
+    els.brand.textContent = manifest.name || "me-and-my-gf";
     renderFullList();
 
     const hash = decodeURIComponent(location.hash.replace(/^#/, ""));
@@ -512,10 +512,10 @@ async function boot() {
 
 document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
   button.addEventListener("click", () => {
-    window.Lifein21Theme?.toggleTheme();
+    window.ThemeController?.toggleTheme();
   });
 });
-window.addEventListener("lifein21:themechange", syncThemeButtons);
+window.addEventListener("me-and-my-gf:themechange", syncThemeButtons);
 syncThemeButtons();
 
 els.pack.addEventListener("click", () => {

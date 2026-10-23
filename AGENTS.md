@@ -1,4 +1,4 @@
-# lifein21
+# me-and-my-gf
 
 点名对应 `core/*.md`；未点名则问要用哪一套。
 

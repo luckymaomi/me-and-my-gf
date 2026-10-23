@@ -20,7 +20,7 @@ class LocalThreadingTCPServer(socketserver.ThreadingTCPServer):
 
 
 def open_browser(url: str) -> None:
-    print("[lifein21] Opening local site...")
+    print("[me-and-my-gf] Opening local site...")
     if os.name == "nt":
         try:
             subprocess.Popen(["cmd", "/c", "start", "", "msedge", "--inprivate", url])
@@ -39,17 +39,17 @@ def serve(directory: Path, port: int, should_open: bool) -> None:
     server = create_server(directory, port)
     with server:
         url = f"http://localhost:{port}/index.html"
-        print(f"[lifein21] Serving {directory} at {url}")
+        print(f"[me-and-my-gf] Serving {directory} at {url}")
         if should_open:
             open_browser(url)
         try:
             server.serve_forever()
         except KeyboardInterrupt:
-            print("\n[lifein21] Server stopped.")
+            print("\n[me-and-my-gf] Server stopped.")
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Serve lifein21 locally.")
+    parser = argparse.ArgumentParser(description="Serve me-and-my-gf locally.")
     parser.add_argument("--port", type=int, default=PORT, help="Local HTTP port.")
     parser.add_argument("--no-open", action="store_true", help="Do not open browser.")
     parser.add_argument("--check", action="store_true", help="Validate paths and exit.")
@@ -64,10 +64,10 @@ def main() -> int:
 
     if args.check:
         if not index_file.exists():
-            print("[lifein21] index.html not found.", file=sys.stderr)
+            print("[me-and-my-gf] index.html not found.", file=sys.stderr)
             return 1
         if not manifest_file.exists():
-            print("[lifein21] manifest.json not found.", file=sys.stderr)
+            print("[me-and-my-gf] manifest.json not found.", file=sys.stderr)
             return 1
         import json
 
@@ -78,20 +78,20 @@ def main() -> int:
             if not path.is_file():
                 missing.append(str(f.get("path")))
         if missing:
-            print("[lifein21] missing files:", ", ".join(missing), file=sys.stderr)
+            print("[me-and-my-gf] missing files:", ", ".join(missing), file=sys.stderr)
             return 1
-        print("[lifein21] check passed.")
+        print("[me-and-my-gf] check passed.")
         return 0
 
     if not index_file.exists():
-        print("[lifein21] index.html not found.", file=sys.stderr)
+        print("[me-and-my-gf] index.html not found.", file=sys.stderr)
         return 1
 
     try:
         serve(project_root, args.port, should_open=not args.no_open)
         return 0
     except OSError as error:
-        print(f"[lifein21] Failed to start server: {error}", file=sys.stderr)
+        print(f"[me-and-my-gf] Failed to start server: {error}", file=sys.stderr)
         return 1
 
 

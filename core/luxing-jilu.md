@@ -1,6 +1,6 @@
 ---
 name: 旅行记录
-description: lifein21：实际旅行与目的地事后记录。
+description: me-and-my-gf：实际旅行与目的地事后记录。
 ---
 
 # 旅行记录

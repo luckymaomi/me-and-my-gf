@@ -1,7 +1,9 @@
-﻿(function () {
+(function () {
     "use strict";
 
-    var storageKey = "lifein21.theme";
+    var storageKey = "me-and-my-gf.theme";
+    var legacyStorageKeys = ["21.theme", "lifein21.theme"];
+    var themeEvent = "me-and-my-gf:themechange";
     var defaultTheme = document.documentElement.dataset.defaultTheme === "dark" ? "dark" : "light";
     function normalizeTheme(value) {
         return value === "dark" || value === "light" ? value : defaultTheme;
@@ -9,7 +11,17 @@
 
     function readStoredTheme() {
         try {
-            return normalizeTheme(window.localStorage.getItem(storageKey));
+            var stored = window.localStorage.getItem(storageKey);
+            if (stored == null) {
+                for (var i = 0; i < legacyStorageKeys.length; i += 1) {
+                    stored = window.localStorage.getItem(legacyStorageKeys[i]);
+                    if (stored != null) {
+                        window.localStorage.setItem(storageKey, stored);
+                        break;
+                    }
+                }
+            }
+            return normalizeTheme(stored);
         } catch (error) {
             return defaultTheme;
         }
@@ -40,7 +52,7 @@
             storeTheme(nextTheme);
         }
 
-        window.dispatchEvent(new CustomEvent("lifein21:themechange", {
+        window.dispatchEvent(new CustomEvent(themeEvent, {
             detail: { theme: nextTheme }
         }));
 
@@ -59,13 +71,12 @@
         return setTheme(getTheme() === "dark" ? "light" : "dark");
     }
 
-    window.Lifein21Theme = {
+    window.ThemeController = {
         getTheme: getTheme,
         setTheme: setTheme,
         toggleTheme: toggleTheme,
         storageKey: storageKey
     };
-    window.ThemeController = window.Lifein21Theme;
 
     applyTheme(readStoredTheme(), false);
 

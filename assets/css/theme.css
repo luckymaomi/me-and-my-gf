@@ -1,4 +1,4 @@
-﻿:root {
+:root {
     color-scheme: light;
     --piyanzi-page-bg: #f1f2f0;
     --piyanzi-page-bg-overlay: rgba(255, 255, 255, 0);
@@ -67,7 +67,7 @@
     --hard-shadow-large: var(--piyanzi-shadow-lg);
     --hard-shadow-focus: var(--piyanzi-shadow-focus);
 
-    /* lifein21 locate 页兼容别名 */
+    /* me-and-my-gf locate 页兼容别名 */
     --life-page-bg: var(--piyanzi-page-bg);
     --life-page-bg-2: var(--piyanzi-page-bg);
     --life-surface: var(--piyanzi-surface);

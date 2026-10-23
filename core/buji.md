@@ -1,6 +1,6 @@
 ---
 name: 补剂
-description: lifein21：补剂品种与用法台账（本人 / 女朋友）。
+description: me-and-my-gf：补剂品种与用法台账（本人 / 女朋友）。
 ---
 
 # 补剂
