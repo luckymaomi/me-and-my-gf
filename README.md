@@ -6,10 +6,4 @@
 
 </div>
 
-我和我女朋友的健康生活：旅行、吃饭、补剂等备忘，网页可浏览、搜索、下载合集。
-
-技能目录读 [manifest.json](./manifest.json)。本地预览：
-
-```powershell
-python index.py
-```
+我和我女朋友的健康生活。
