@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
 
-    var storageKey = "piyanzi.theme";
+    var storageKey = "lifein21.theme";
     var defaultTheme = document.documentElement.dataset.defaultTheme === "dark" ? "dark" : "light";
     function normalizeTheme(value) {
         return value === "dark" || value === "light" ? value : defaultTheme;
@@ -40,7 +40,7 @@
             storeTheme(nextTheme);
         }
 
-        window.dispatchEvent(new CustomEvent("piyanzi:themechange", {
+        window.dispatchEvent(new CustomEvent("lifein21:themechange", {
             detail: { theme: nextTheme }
         }));
 
@@ -59,12 +59,13 @@
         return setTheme(getTheme() === "dark" ? "light" : "dark");
     }
 
-    window.PiyanziTheme = {
+    window.Lifein21Theme = {
         getTheme: getTheme,
         setTheme: setTheme,
         toggleTheme: toggleTheme,
         storageKey: storageKey
     };
+    window.ThemeController = window.Lifein21Theme;
 
     applyTheme(readStoredTheme(), false);
 

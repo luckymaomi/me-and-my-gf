@@ -89,7 +89,7 @@ function remoteSkillUrl(file) {
 function agentFetchSinglePrompt(file) {
   const url = remoteSkillUrl(file);
   const title = file.title || file.id || "Skill";
-  return `请阅读 ${url}（皮燕子 Skill：${title}），然后启动本 Skill。`;
+  return `请阅读 ${url}（lifein21：${title}），然后启动本 Skill。`;
 }
 
 /**
@@ -144,8 +144,8 @@ function closeMobileMenu() {
 }
 
 function syncThemeButtons() {
-  if (!window.PiyanziTheme) return;
-  const isDark = window.PiyanziTheme.getTheme() === "dark";
+  if (!window.Lifein21Theme) return;
+  const isDark = window.Lifein21Theme.getTheme() === "dark";
   const label = isDark ? "切换到白天模式" : "切换到暗夜模式";
   document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
     button.setAttribute("aria-label", label);
@@ -190,12 +190,56 @@ function createNavLink(file, snippet) {
   return link;
 }
 
+const LOCATE_ID = "locate";
+
+function createLocateNavLink() {
+  const link = document.createElement("a");
+  link.href = `#${LOCATE_ID}`;
+  link.className = "nav-link";
+  link.dataset.id = LOCATE_ID;
+  const head = document.createElement("div");
+  head.className = "memo-link-head";
+  const title = document.createElement("span");
+  title.className = "memo-link-title";
+  title.textContent = "定位";
+  head.appendChild(title);
+  link.appendChild(head);
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    selectFile(LOCATE_ID);
+  });
+  return link;
+}
+
 function renderFullList() {
   els.nav.replaceChildren();
+  els.nav.appendChild(createLocateNavLink());
   for (const file of listedFiles()) {
     els.nav.appendChild(createNavLink(file));
   }
   if (activeId) markActive(activeId);
+}
+
+function openLocate() {
+  const version = ++renderVersion;
+  activeId = LOCATE_ID;
+  activeMarkdown = "";
+  document.title = "定位 - lifein21";
+  markActive(LOCATE_ID);
+
+  const wrap = document.createElement("div");
+  wrap.className = "content-embed";
+  const frame = document.createElement("iframe");
+  frame.className = "content-embed-frame";
+  frame.title = "定位";
+  frame.src = "./locate.html?embed=1";
+  frame.setAttribute("allow", "geolocation");
+  wrap.appendChild(frame);
+
+  if (version !== renderVersion) return;
+  els.content.classList.add("content-is-embed");
+  els.content.replaceChildren(wrap);
+  history.replaceState(null, "", `#${LOCATE_ID}`);
 }
 
 function makeSnippet(markdown, query) {
@@ -264,9 +308,7 @@ function renderToolbar(file) {
   promptField.className = "memo-agent-prompt-input";
   promptField.readOnly = true;
   promptField.value = prompt;
-  promptField.title = isPack
-    ? "只指向分身一篇；文内「弹药链接」含全部 Skill raw"
-    : "联网拉取 Skill 的一句话指令";
+  promptField.title = "复制给 Agent";
   promptField.addEventListener("focus", () => promptField.select());
   promptField.addEventListener("click", () => promptField.select());
 
@@ -274,9 +316,7 @@ function renderToolbar(file) {
   copyBtn.type = "button";
   copyBtn.className = "memo-download-button";
   copyBtn.textContent = "复制";
-  copyBtn.title = isPack
-    ? "复制后粘贴给 Agent：读分身并按文首链接装载全部 Skill"
-    : "复制后粘贴给 Agent，无需下载 Skill 文件";
+  copyBtn.title = "复制";
   copyBtn.addEventListener("click", async () => {
     try {
       await copyText(prompt);
@@ -299,7 +339,7 @@ function renderToolbar(file) {
   const downloadBtn = document.createElement("button");
   downloadBtn.type = "button";
   downloadBtn.className = "memo-download-button";
-  downloadBtn.textContent = "下载 Markdown";
+  downloadBtn.textContent = "下载";
   downloadBtn.addEventListener("click", () => {
     triggerDownload(downloadName(file), activeMarkdown);
   });
@@ -309,18 +349,25 @@ function renderToolbar(file) {
 }
 
 async function openFile(id, searchValue = els.search.value) {
+  if (id === LOCATE_ID) {
+    openLocate();
+    return;
+  }
+
   const file = listedFiles().find((f) => f.id === id);
   if (!file) {
     activeMarkdown = "";
-    els.content.textContent = "没有文件。";
+    els.content.classList.remove("content-is-embed");
+    els.content.textContent = "没有文件";
     return;
   }
 
   const version = ++renderVersion;
   activeId = id;
-  document.title = `${file.title} - 皮燕子`;
+  document.title = `${file.title} - lifein21`;
   markActive(id);
-  els.content.textContent = "正在加载...";
+  els.content.classList.remove("content-is-embed");
+  els.content.textContent = "加载中";
 
   try {
     activeMarkdown = await loadRaw(file.path);
@@ -416,7 +463,7 @@ async function packDownload() {
 
   try {
     const stamp = new Date().toISOString().slice(0, 10);
-    const brand = manifest.name || "皮燕子";
+    const brand = manifest.name || "lifein21";
     const parts = [
       `# ${brand}合集`,
       "",
@@ -431,7 +478,7 @@ async function packDownload() {
       parts.push(`===== ${title}（${file.path}） =====`, "", body, "", "");
     }
 
-    const filename = `${manifest.packPrefix || "piyanzi"}-合集-${stamp}.md`;
+    const filename = `${manifest.packPrefix || "lifein21"}-合集-${stamp}.md`;
     triggerDownload(filename, `${parts.join("\n").replace(/\s+$/, "")}\n`);
   } catch (err) {
     console.error(err);
@@ -447,14 +494,17 @@ async function boot() {
     const res = await fetch(MANIFEST_URL);
     if (!res.ok) throw new Error(`清单加载失败：${res.status}`);
     manifest = await res.json();
-    els.brand.textContent = manifest.name || "皮燕子";
+    els.brand.textContent = manifest.name || "lifein21";
     renderFullList();
 
     const hash = decodeURIComponent(location.hash.replace(/^#/, ""));
     const first = listedFiles()[0];
-    const target = listedFiles().find((f) => f.id === hash)?.id || first?.id;
+    const target =
+      hash === LOCATE_ID
+        ? LOCATE_ID
+        : listedFiles().find((f) => f.id === hash)?.id || first?.id;
     if (target) await openFile(target);
-    else els.content.textContent = "没有文件。";
+    else els.content.textContent = "没有文件";
   } catch (err) {
     els.content.textContent = err instanceof Error ? err.message : String(err);
   }
@@ -462,10 +512,10 @@ async function boot() {
 
 document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
   button.addEventListener("click", () => {
-    window.PiyanziTheme?.toggleTheme();
+    window.Lifein21Theme?.toggleTheme();
   });
 });
-window.addEventListener("piyanzi:themechange", syncThemeButtons);
+window.addEventListener("lifein21:themechange", syncThemeButtons);
 syncThemeButtons();
 
 els.pack.addEventListener("click", () => {

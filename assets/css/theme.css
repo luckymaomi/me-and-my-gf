@@ -67,6 +67,30 @@
     --hard-shadow-large: var(--piyanzi-shadow-lg);
     --hard-shadow-focus: var(--piyanzi-shadow-focus);
 
+    /* lifein21 locate 页兼容别名 */
+    --life-page-bg: var(--piyanzi-page-bg);
+    --life-page-bg-2: var(--piyanzi-page-bg);
+    --life-surface: var(--piyanzi-surface);
+    --life-surface-solid: var(--piyanzi-surface);
+    --life-surface-muted: var(--piyanzi-surface-muted);
+    --life-ink: var(--piyanzi-text);
+    --life-muted: var(--piyanzi-text-muted);
+    --life-quiet: var(--piyanzi-text-quiet);
+    --life-border: var(--piyanzi-border);
+    --life-border-strong: var(--piyanzi-border-strong);
+    --life-link: var(--piyanzi-link);
+    --life-focus: var(--piyanzi-focus);
+    --life-accent: var(--piyanzi-accent-sky);
+    --life-accent-soft: color-mix(in srgb, var(--piyanzi-accent-sky) 28%, var(--piyanzi-surface));
+    --life-warm: var(--piyanzi-accent-amber);
+    --life-on-accent: var(--piyanzi-on-accent);
+    --life-shadow: var(--piyanzi-shadow-md);
+    --life-shadow-soft: var(--piyanzi-shadow-sm);
+    --life-radius: var(--piyanzi-radius);
+    --life-radius-sm: var(--piyanzi-radius);
+    --life-font-display: Aptos, "Microsoft YaHei UI", "Segoe UI", sans-serif;
+    --life-font-body: Aptos, "Microsoft YaHei UI", "Segoe UI", sans-serif;
+
     --bs-body-bg: var(--piyanzi-page-bg);
     --bs-body-color: var(--piyanzi-text);
     --bs-border-color: var(--piyanzi-border);

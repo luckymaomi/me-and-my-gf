@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>定位 · lifein21</title>
+  <script src="./assets/js/theme.js"></script>
+  <link rel="stylesheet" href="./assets/css/theme.css">
+  <link rel="stylesheet" href="./assets/css/support-shell.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="./assets/css/locate.css">
+  <script>
+    if (/(?:^|[?&])embed=1(?:&|$)/.test(location.search)) {
+      document.documentElement.classList.add("locate-embed");
+    }
+  </script>
+</head>
+<body>
+  <div class="support-shell locate-shell">
+    <header class="support-bar locate-bar locate-chrome">
+      <a class="support-brand" href="./">
+        <strong>lifein21</strong>
+      </a>
+      <nav class="support-actions" aria-label="页面操作">
+        <a class="support-link" href="./">返回</a>
+        <button class="support-icon-button" type="button" data-theme-toggle aria-label="切换主题" title="切换主题">
+          <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path>
+          </svg>
+          <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.99 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 20.99 12.79Z"></path>
+          </svg>
+        </button>
+      </nav>
+    </header>
+
+    <main class="locate-main">
+      <section class="locate-panel">
+        <h1>定位</h1>
+        <div class="locate-actions">
+          <button type="button" class="locate-secondary" id="btnCopy" disabled>复制</button>
+        </div>
+        <p class="locate-status" id="status" role="status">定位中…</p>
+
+        <dl class="locate-meta" id="meta" hidden>
+          <div class="locate-meta-wide"><dt>地址</dt><dd id="metaAddr">—</dd></div>
+          <div><dt>纬度</dt><dd id="metaLat">—</dd></div>
+          <div><dt>经度</dt><dd id="metaLng">—</dd></div>
+          <div><dt>精度</dt><dd id="metaAcc">—</dd></div>
+          <div><dt>海拔</dt><dd id="metaAlt">—</dd></div>
+          <div><dt>朝向 / 速度</dt><dd id="metaMove">—</dd></div>
+        </dl>
+      </section>
+
+      <section class="locate-map-wrap" aria-label="地图">
+        <div id="map" class="locate-map"></div>
+        <p class="locate-map-note">© OpenStreetMap</p>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="./assets/js/locate.js"></script>
+</body>
+</html>

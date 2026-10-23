@@ -1,0 +1,184 @@
+html.locate-embed,
+html.locate-embed body {
+    min-height: 100%;
+    background: var(--soft-bg);
+}
+
+html.locate-embed .locate-shell {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+html.locate-embed .locate-chrome {
+    display: none;
+}
+
+html.locate-embed .locate-main {
+    margin: 0;
+    min-height: 100vh;
+    gap: 18px;
+    padding: 0;
+}
+
+.locate-shell {
+    width: min(1120px, 100%);
+}
+
+.locate-bar {
+    display: flex;
+}
+
+.locate-main {
+    display: grid;
+    grid-template-columns: minmax(260px, 360px) minmax(0, 1fr);
+    gap: 22px;
+    margin-top: 28px;
+}
+
+.locate-panel {
+    padding: 18px 16px 20px;
+    border: 2px solid var(--soft-border);
+    background: var(--soft-surface);
+    box-shadow: var(--hard-shadow-medium);
+}
+
+.locate-panel h1 {
+    margin: 0 0 14px;
+    font-size: 24px;
+    font-weight: 750;
+}
+
+.locate-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.locate-secondary {
+    min-height: 36px;
+    padding: 0 12px;
+    border: 2px solid var(--soft-border);
+    background: var(--soft-surface);
+    box-shadow: var(--hard-shadow-small);
+    color: var(--soft-ink);
+    font-family: "Cascadia Mono", Consolas, "Microsoft YaHei UI", monospace;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: box-shadow 150ms ease-out, transform 150ms ease-out, background 150ms ease-out;
+}
+
+.locate-secondary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.locate-secondary:hover:not(:disabled) {
+    background: var(--soft-sky);
+    color: var(--soft-on-pastel);
+    box-shadow: none;
+    transform: translate(1px, 1px);
+}
+
+.locate-status {
+    min-height: 1.4em;
+    margin: 0 0 14px;
+    color: var(--soft-muted);
+    font-family: "Cascadia Mono", Consolas, monospace;
+    font-size: 12px;
+}
+
+.locate-status.is-error {
+    color: var(--soft-danger);
+}
+
+.locate-status.is-ok {
+    color: var(--soft-beta);
+}
+
+.locate-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 12px;
+    margin: 0;
+}
+
+.locate-meta-wide {
+    grid-column: 1 / -1;
+}
+
+.locate-meta > div {
+    padding: 10px;
+    border: 2px solid var(--soft-border);
+    background: var(--soft-surface-muted);
+    box-shadow: var(--hard-shadow-small);
+}
+
+.locate-meta dt {
+    margin: 0 0 4px;
+    color: var(--soft-quiet);
+    font-family: "Cascadia Mono", Consolas, monospace;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.locate-meta dd {
+    margin: 0;
+    font-family: "Cascadia Mono", Consolas, monospace;
+    font-size: 12px;
+    word-break: break-all;
+}
+
+.locate-map-wrap {
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--soft-border);
+    overflow: hidden;
+    background: var(--soft-surface);
+    box-shadow: var(--hard-shadow-medium);
+}
+
+html.locate-embed .locate-map-wrap {
+    min-height: 0;
+}
+
+.locate-map {
+    flex: 1 1 auto;
+    min-height: 420px;
+    width: 100%;
+}
+
+html.locate-embed .locate-map {
+    min-height: 280px;
+}
+
+.locate-map-note {
+    margin: 0;
+    padding: 8px 12px;
+    color: var(--soft-quiet);
+    font-family: "Cascadia Mono", Consolas, monospace;
+    font-size: 11px;
+    background: var(--soft-surface-muted);
+    border-top: 2px solid var(--soft-border);
+}
+
+.leaflet-container {
+    font: inherit;
+    background: var(--soft-surface-muted);
+}
+
+@media (max-width: 860px) {
+    .locate-main,
+    html.locate-embed .locate-main {
+        grid-template-columns: 1fr;
+    }
+
+    .locate-map-wrap,
+    .locate-map {
+        min-height: 320px;
+    }
+}

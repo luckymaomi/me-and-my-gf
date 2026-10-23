@@ -515,3 +515,26 @@
     }
 }
 
+.content.content-is-embed {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+    overflow: hidden;
+}
+
+.content-embed {
+    display: flex;
+    width: 100%;
+    min-height: calc(100vh - 160px);
+    height: calc(100vh - 160px);
+}
+
+.content-embed-frame {
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--soft-border);
+    background: var(--soft-surface);
+    box-shadow: var(--hard-shadow-medium);
+}
+
