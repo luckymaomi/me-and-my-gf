@@ -2,7 +2,6 @@
     "use strict";
 
     var storageKey = "me-and-my-gf.theme";
-    var legacyStorageKeys = ["21.theme", "lifein21.theme"];
     var themeEvent = "me-and-my-gf:themechange";
     var defaultTheme = document.documentElement.dataset.defaultTheme === "dark" ? "dark" : "light";
     function normalizeTheme(value) {
@@ -11,17 +10,7 @@
 
     function readStoredTheme() {
         try {
-            var stored = window.localStorage.getItem(storageKey);
-            if (stored == null) {
-                for (var i = 0; i < legacyStorageKeys.length; i += 1) {
-                    stored = window.localStorage.getItem(legacyStorageKeys[i]);
-                    if (stored != null) {
-                        window.localStorage.setItem(storageKey, stored);
-                        break;
-                    }
-                }
-            }
-            return normalizeTheme(stored);
+            return normalizeTheme(window.localStorage.getItem(storageKey));
         } catch (error) {
             return defaultTheme;
         }
