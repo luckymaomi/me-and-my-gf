@@ -480,7 +480,7 @@ async function packDownload() {
       parts.push(`===== ${title}（${file.path}） =====`, "", body, "", "");
     }
 
-    const filename = `${manifest.packPrefix || "me-and-my-gf"}-合集-${stamp}.md`;
+    const filename = `${manifest.packPrefix || "me-and-my-gf"}-${stamp}.md`;
     triggerDownload(filename, `${parts.join("\n").replace(/\s+$/, "")}\n`);
   } catch (err) {
     console.error(err);
