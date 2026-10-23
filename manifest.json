@@ -1,0 +1,49 @@
+{
+  "name": "lifein21",
+  "packPrefix": "lifein21",
+  "remoteSkillBase": "https://raw.githubusercontent.com/luckymaomi/lifein21/master/",
+  "files": [
+    {
+      "id": "AGENTS",
+      "title": "AGENTS",
+      "path": "AGENTS.md",
+      "listed": false
+    },
+    {
+      "id": "luxing-pianhao",
+      "title": "旅行偏好",
+      "path": "core/luxing-pianhao.md",
+      "listed": true
+    },
+    {
+      "id": "luxing-jilu",
+      "title": "旅行记录",
+      "path": "core/luxing-jilu.md",
+      "listed": true
+    },
+    {
+      "id": "huizuofan",
+      "title": "我会做的",
+      "path": "core/huizuofan.md",
+      "listed": true
+    },
+    {
+      "id": "meitian-chi",
+      "title": "每天吃的",
+      "path": "core/meitian-chi.md",
+      "listed": true
+    },
+    {
+      "id": "buji",
+      "title": "补剂",
+      "path": "core/buji.md",
+      "listed": true
+    },
+    {
+      "id": "buji-shiyong",
+      "title": "补剂食用",
+      "path": "core/buji-shiyong.md",
+      "listed": true
+    }
+  ]
+}
