@@ -467,6 +467,8 @@ async function packDownload() {
     const parts = [
       `# ${brand}合集`,
       "",
+      "我和我女朋友的生活合集：旅行与吃饭（菜谱、每日饮食、补剂等）。",
+      "",
       `生成日期：${stamp}`,
       `收录文件：${allFiles().length} 篇`,
       "",

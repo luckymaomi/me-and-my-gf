@@ -4,7 +4,7 @@
   var map = null;
   var marker = null;
   var accuracyCircle = null;
-  var watchId = null;
+  var locating = false;
   var lastLat = null;
   var lastLng = null;
   var lastAddress = "";
@@ -14,6 +14,7 @@
 
   var els = {
     status: document.getElementById("status"),
+    btnLocate: document.getElementById("btnLocate"),
     btnCopy: document.getElementById("btnCopy"),
     meta: document.getElementById("meta"),
     metaAddr: document.getElementById("metaAddr"),
@@ -98,6 +99,9 @@
   }
 
   function applyFix(fix) {
+    locating = false;
+    els.btnLocate.disabled = false;
+
     var c = fix.coords;
     var lat = c.latitude;
     var lng = c.longitude;
@@ -142,11 +146,13 @@
       }).addTo(map);
     }
 
-    setStatus("跟踪中 · ±" + (acc != null ? Math.round(acc) : "?") + " m", "is-ok");
+    setStatus("已定位 · ±" + (acc != null ? Math.round(acc) : "?") + " m", "is-ok");
     scheduleReverse(lat, lng);
   }
 
   function onError(err) {
+    locating = false;
+    els.btnLocate.disabled = false;
     var msg = "定位失败";
     if (err && err.code === 1) msg = "未允许位置权限";
     else if (err && err.code === 2) msg = "暂时无法获取位置";
@@ -155,25 +161,20 @@
     setStatus(msg, "is-error");
   }
 
-  function startWatch() {
+  function locateOnce() {
+    if (locating) return;
     if (!navigator.geolocation) {
       setStatus("浏览器不支持定位", "is-error");
       return;
     }
-    if (watchId != null) return;
+    locating = true;
+    els.btnLocate.disabled = true;
     setStatus("定位中…");
-    watchId = navigator.geolocation.watchPosition(applyFix, onError, {
+    navigator.geolocation.getCurrentPosition(applyFix, onError, {
       enableHighAccuracy: true,
       timeout: 20000,
       maximumAge: 0,
     });
-  }
-
-  function stopWatch() {
-    if (watchId != null && navigator.geolocation) {
-      navigator.geolocation.clearWatch(watchId);
-      watchId = null;
-    }
   }
 
   async function onCopy() {
@@ -207,11 +208,10 @@
 
   initMap();
   bindThemeToggle();
+  els.btnLocate.addEventListener("click", locateOnce);
   els.btnCopy.addEventListener("click", function () {
     void onCopy();
   });
-  startWatch();
-  window.addEventListener("beforeunload", stopWatch);
   document.addEventListener("visibilitychange", function () {
     if (document.hidden) return;
     if (map) map.invalidateSize();
